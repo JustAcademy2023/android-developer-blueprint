@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Android Developer Blueprint — Career Guide</title>
+<meta name="description" content="A blueprint for going from zero to hired Android developer: the roadmap, the build tracks, and the field notes worth reading.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blueprint:#0f2c4c;
+    --blueprint-deep:#0a2038;
+    --grid-line:rgba(255,255,255,0.075);
+    --paper:#f6f2e7;
+    --paper-edge:#e5ddc8;
+    --ink:#16202b;
+    --ink-soft:#48586b;
+    --mint:#6EE7B7;
+    --amber:#FFB648;
+    --coral:#FF5D73;
+    --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--blueprint);
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size:34px 34px;
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3,.mono{font-family:'Space Grotesk', sans-serif;}
+  .label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--mint);
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+  img,svg{max-width:100%;}
+  :focus-visible{outline:2px solid var(--mint); outline-offset:3px;}
+
+  /* header */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,32,56,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--grid-line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 0;
+  }
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .brand-mark{
+    width:34px; height:34px; border:1.5px solid var(--mint);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .brand-mark::before{
+    content:""; position:absolute; width:14px; height:14px;
+    border:1.5px solid var(--mint); border-radius:50%;
+  }
+  .brand-mark::after{
+    content:""; position:absolute; width:1.5px; height:20px; background:var(--mint);
+    transform:rotate(45deg);
+  }
+  .brand-text{font-weight:600; font-size:1rem; letter-spacing:0.01em;}
+  .brand-text span{display:block; font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--amber); letter-spacing:0.1em; font-weight:400;}
+  nav.links{display:flex; gap:26px; font-size:0.9rem;}
+  nav.links a{text-decoration:none; color:var(--paper); opacity:0.8; transition:opacity .2s;}
+  nav.links a:hover{opacity:1;}
+  .nav-cta{
+    display:inline-block; background:var(--mint); color:var(--blueprint-deep);
+    padding:9px 16px; border-radius:6px; font-weight:600; font-size:0.85rem;
+    text-decoration:none;
+  }
+  .menu-toggle{display:none; background:none; border:1px solid var(--grid-line); color:var(--paper); width:38px; height:38px; border-radius:6px; cursor:pointer;}
+
+  /* hero */
+  .hero{padding:76px 0 60px;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px; align-items:center;}
+  .hero h1{
+    font-size:clamp(2.1rem, 4vw, 3.15rem);
+    line-height:1.12; margin:14px 0 20px; font-weight:700;
+  }
+  .hero p.lead{font-size:1.06rem; color:#d8e4ef; max-width:46ch; margin:0 0 30px;}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 22px; border-radius:7px; font-weight:600; font-size:0.94rem;
+    text-decoration:none; transition:transform .18s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-solid{background:var(--mint); color:var(--blueprint-deep);}
+  .btn-outline{border:1.4px solid var(--paper); color:var(--paper);}
+
+  .blueprint-card{
+    border:1px dashed rgba(246,242,231,0.35);
+    border-radius:10px; padding:22px;
+    background:rgba(255,255,255,0.02);
+  }
+  .diagram-caption{
+    display:flex; justify-content:space-between; margin-top:14px;
+    font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:#9db4c9; letter-spacing:0.06em;
+  }
+  #leader-line{stroke-dasharray:340; stroke-dashoffset:340; animation:draw 1.6s ease forwards .3s;}
+  #leader-line2{stroke-dasharray:260; stroke-dashoffset:260; animation:draw 1.6s ease forwards .55s;}
+  #leader-line3{stroke-dasharray:220; stroke-dashoffset:220; animation:draw 1.6s ease forwards .8s;}
+  #leader-line4{stroke-dasharray:280; stroke-dashoffset:280; animation:draw 1.6s ease forwards 1.05s;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @media (prefers-reduced-motion: reduce){
+    #leader-line,#leader-line2,#leader-line3,#leader-line4{animation:none; stroke-dashoffset:0;}
+  }
+
+  /* section shell */
+  section{padding:70px 0;}
+  .section-head{max-width:640px; margin-bottom:44px;}
+  .section-head h2{font-size:clamp(1.5rem,2.6vw,2rem); margin:10px 0 10px;}
+  .section-head p{color:#c6d5e3; margin:0;}
+
+  /* roadmap */
+  .roadmap{position:relative;}
+  .path-line{
+    position:absolute; left:34px; top:14px; bottom:14px; width:2px;
+    background-image:linear-gradient(var(--paper) 60%, transparent 0%);
+    background-size:2px 12px; opacity:0.35;
+  }
+  .stops{display:flex; flex-direction:column; gap:28px; position:relative;}
+  .stop{
+    display:grid; grid-template-columns:70px 1fr; gap:0 22px; align-items:start;
+  }
+  .stop-num{
+    width:70px; height:70px; border-radius:50%; background:var(--paper); color:var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.3rem;
+    border:3px solid var(--blueprint); box-shadow:0 0 0 2px var(--mint); z-index:2;
+  }
+  .stop-card{
+    background:var(--paper); color:var(--ink); border-radius:10px; padding:22px 26px;
+    box-shadow:0 12px 24px rgba(0,0,0,0.18);
+  }
+  .stop-card h3{margin:0 0 8px; font-size:1.15rem; color:var(--blueprint-deep);}
+  .stop-card p{margin:0 0 12px; color:var(--ink-soft); font-size:0.95rem;}
+  .chip-link{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'JetBrains Mono',monospace; font-size:0.76rem;
+    color:#0a5c47; text-decoration:none; border-bottom:1px dashed #0a5c47;
+  }
+
+  /* build tracks */
+  .track-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+  .track-card{
+    display:block; text-decoration:none; color:var(--paper);
+    border:1px dashed rgba(246,242,231,0.35); border-radius:12px;
+    padding:26px 22px; position:relative; overflow:hidden;
+    transition:border-color .2s ease, transform .2s ease, background .2s ease;
+  }
+  .track-card:hover{border-color:var(--mint); transform:translateY(-4px); background:rgba(110,231,183,0.06);}
+  .track-icon{
+    width:46px; height:46px; border-radius:9px; display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1rem; margin-bottom:18px;
+    color:var(--blueprint-deep);
+  }
+  .track-card h3{margin:0 0 8px; font-size:1.08rem;}
+  .track-card p{margin:0 0 20px; font-size:0.87rem; color:#c6d5e3;}
+  .track-arrow{font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--amber);}
+
+  /* field notes */
+  .notes-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .note-card{
+    background:var(--paper); color:var(--ink); border-radius:3px; padding:24px 22px 26px;
+    text-decoration:none; display:block; position:relative;
+    box-shadow:0 14px 26px rgba(0,0,0,0.22);
+    transition:transform .2s ease;
+  }
+  .note-card:nth-child(1){transform:rotate(-1.4deg);}
+  .note-card:nth-child(2){transform:rotate(0.8deg);}
+  .note-card:nth-child(3){transform:rotate(-0.6deg);}
+  .note-card:hover{transform:rotate(0deg) translateY(-4px);}
+  .note-tape{
+    position:absolute; top:-10px; left:26px; width:52px; height:20px;
+    background:rgba(255,182,72,0.55); border:1px solid rgba(255,182,72,0.8);
+    transform:rotate(-3deg);
+  }
+  .note-card .label{color:#0a5c47;}
+  .note-card h3{margin:12px 0 10px; font-size:1.05rem; color:var(--blueprint-deep); line-height:1.35;}
+  .note-card p{margin:0 0 16px; font-size:0.88rem; color:var(--ink-soft);}
+  .note-read{font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--coral);}
+
+  /* footer / title block */
+  footer{border-top:1px solid var(--grid-line); padding:50px 0 30px; margin-top:20px;}
+  .title-block{
+    border:1px solid rgba(246,242,231,0.3); border-radius:10px;
+    display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:0;
+    overflow:hidden; margin-bottom:30px;
+  }
+  .tb-cell{padding:20px 24px; border-left:1px solid rgba(246,242,231,0.18);}
+  .tb-cell:first-child{border-left:none;}
+  .tb-cell .label{display:block; margin-bottom:6px;}
+  .tb-cell strong{font-family:'Space Grotesk',sans-serif; font-size:0.98rem;}
+  .foot-bottom{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+    font-size:0.85rem; color:#9db4c9;
+  }
+  .foot-links{display:flex; gap:18px; flex-wrap:wrap;}
+  .foot-links a{text-decoration:none; color:#c6d5e3;}
+  .foot-links a:hover{color:var(--mint);}
+  .back-top{
+    text-decoration:none; color:var(--blueprint-deep); background:var(--mint);
+    padding:8px 14px; border-radius:6px; font-size:0.8rem; font-weight:600;
+  }
+
+  @media (max-width:940px){
+    .hero-grid{grid-template-columns:1fr;}
+    .track-grid{grid-template-columns:repeat(2,1fr);}
+    .notes-grid{grid-template-columns:1fr;}
+    .title-block{grid-template-columns:1fr;}
+    .tb-cell{border-left:none; border-top:1px solid rgba(246,242,231,0.18);}
+    .tb-cell:first-child{border-top:none;}
+  }
+  @media (max-width:720px){
+    nav.links{display:none;}
+    .menu-toggle{display:block;}
+  }
+  @media (max-width:600px){
+    .track-grid{grid-template-columns:1fr;}
+    .stop{grid-template-columns:52px 1fr; gap:0 14px;}
+    .stop-num{width:52px; height:52px; font-size:1.05rem;}
+    .path-line{left:26px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="brand-mark"></span>
+      <span class="brand-text">Android Developer Blueprint<span>DRAFTED FOR FIRST-TIME BUILDERS</span></span>
+    </a>
+    <nav class="links">
+      <a href="#roadmap">Roadmap</a>
+      <a href="#tracks">Build Tracks</a>
+      <a href="#notes">Field Notes</a>
+    </nav>
+    <a class="nav-cta" href="https://www.justacademy.co/course-detail/pune/android-app-development-in-pune" target="_blank" rel="noopener">Start building</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="label">FIG. 01 — CAREER ELEVATION</span>
+        <h1>A working blueprint for becoming an Android developer</h1>
+        <p class="lead">Not another listicle. This is the layout of what to learn, what to build, and where to point people once you're ready to be hired — drawn out step by step instead of scattered across forty tabs.</p>
+        <div class="cta-row">
+          <a class="btn btn-solid" href="https://www.justacademy.co/course-detail/pune/android-app-development-in-pune" target="_blank" rel="noopener">Explore the Android track</a>
+          <a class="btn btn-outline" href="https://www.justacademy.co/blog-detail/android-app-development-career-guide-how-to-become-an-android-developer" target="_blank" rel="noopener">Read the full guide</a>
+        </div>
+      </div>
+
+      <div class="blueprint-card">
+        <svg viewBox="0 0 420 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="150" y="24" width="120" height="240" rx="16" stroke="#f6f2e7" stroke-opacity="0.8" stroke-width="1.4"/>
+          <rect x="164" y="46" width="92" height="176" rx="3" stroke="#6EE7B7" stroke-opacity="0.6" stroke-width="1"/>
+          <circle cx="210" cy="244" r="7" stroke="#f6f2e7" stroke-opacity="0.8" stroke-width="1.2"/>
+          <circle cx="176" cy="60" r="2.5" fill="#FFB648"/>
+          <line id="leader-line" x1="176" y1="60" x2="60" y2="40" stroke="#FFB648" stroke-width="1.2"/>
+          <text x="14" y="34" fill="#f6f2e7" font-family="JetBrains Mono" font-size="10">Kotlin +</text>
+          <text x="14" y="46" font-family="JetBrains Mono" font-size="10" fill="#f6f2e7">Jetpack Compose</text>
+
+          <circle cx="245" cy="90" r="2.5" fill="#6EE7B7"/>
+          <line id="leader-line2" x1="245" y1="90" x2="360" y2="70" stroke="#6EE7B7" stroke-width="1.2"/>
+          <text x="300" y="64" font-family="JetBrains Mono" font-size="10" fill="#f6f2e7">Android Studio</text>
+
+          <circle cx="180" cy="150" r="2.5" fill="#FF5D73"/>
+          <line id="leader-line3" x1="180" y1="150" x2="46" y2="170" stroke="#FF5D73" stroke-width="1.2"/>
+          <text x="14" y="188" font-family="JetBrains Mono" font-size="10" fill="#f6f2e7">Git + GitHub</text>
+
+          <circle cx="240" cy="196" r="2.5" fill="#f6f2e7"/>
+          <line id="leader-line4" x1="240" y1="196" x2="366" y2="220" stroke="#f6f2e7" stroke-opacity="0.8" stroke-width="1.2"/>
+          <text x="300" y="238" font-family="JetBrains Mono" font-size="10" fill="#f6f2e7">REST APIs + Room</text>
+        </svg>
+        <div class="diagram-caption">
+          <span>SCALE — 1:1 CAREER</span>
+          <span>REV. 2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roadmap" class="roadmap">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="label">FIG. 02 — SEQUENCE</span>
+        <h2>The five stops between "curious" and "hired"</h2>
+        <p>Skip a stop and the next one gets harder. Take them in order and each one gets easier than the last.</p>
+      </div>
+      <div class="stops">
+        <div class="stop">
+          <div class="stop-num">01</div>
+          <div class="stop-card">
+            <h3>Lay the foundation</h3>
+            <p>Kotlin syntax, the Android component lifecycle, and enough Android Studio fluency that the tool stops fighting you.</p>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="stop-num">02</div>
+          <div class="stop-card">
+            <h3>Ship small, ugly things</h3>
+            <p>A notes app. A calculator. A quiz that pulls questions from an API. The point isn't polish — it's finishing.</p>
+            <a class="chip-link" href="https://www.justacademy.co/blog-detail/android-developer-roadmap-2026-skills-tools-and-career-path" target="_blank" rel="noopener">Open the 2026 roadmap breakdown ↗</a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="stop-num">03</div>
+          <div class="stop-card">
+            <h3>Turn projects into a portfolio</h3>
+            <p>Three working apps on GitHub with clear write-ups beat a folder of certificates, every single time.</p>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="stop-num">04</div>
+          <div class="stop-card">
+            <h3>Get real feedback pressure</h3>
+            <p>An internship, a freelance gig, even an unpaid favor for a local business — anything with a deadline and a stakeholder.</p>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="stop-num">05</div>
+          <div class="stop-card">
+            <h3>Apply on purpose</h3>
+            <p>Target roles that match your portfolio's strengths, not just any listing with "Android" in the title.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracks">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="label">FIG. 03 — BUILD TRACKS</span>
+        <h2>Pick the stack that matches where you're headed</h2>
+        <p>Android is the deepest track here, but these four cover almost every mobile role hiring in Pune right now.</p>
+      </div>
+      <div class="track-grid">
+        <a class="track-card" href="https://www.justacademy.co/course-detail/pune/android-app-development-in-pune" target="_blank" rel="noopener">
+          <div class="track-icon" style="background:var(--mint);">A</div>
+          <h3>Android Development</h3>
+          <p>Kotlin, Jetpack Compose, and native app architecture from the ground up.</p>
+          <span class="track-arrow">View course ↗</span>
+        </a>
+        <a class="track-card" href="https://www.justacademy.co/course-detail/pune/ios-training-in-pune" target="_blank" rel="noopener">
+          <div class="track-icon" style="background:var(--amber);">i</div>
+          <h3>iOS Development</h3>
+          <p>Swift and the Apple ecosystem, for anyone building toward the other half of mobile.</p>
+          <span class="track-arrow">View course ↗</span>
+        </a>
+        <a class="track-card" href="https://www.justacademy.co/course-detail/pune/react-native-training-in-pune" target="_blank" rel="noopener">
+          <div class="track-icon" style="background:var(--coral);">RN</div>
+          <h3>React Native</h3>
+          <p>One codebase, two platforms — for developers who already think in components.</p>
+          <span class="track-arrow">View course ↗</span>
+        </a>
+        <a class="track-card" href="https://www.justacademy.co/course-detail/pune/flutter-training-in-pune" target="_blank" rel="noopener">
+          <div class="track-icon" style="background:#8fd7ff;">Fl</div>
+          <h3>Flutter</h3>
+          <p>Dart and a single widget tree, for teams that want speed without splitting the codebase.</p>
+          <span class="track-arrow">View course ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="notes">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="label">FIG. 04 — FIELD NOTES</span>
+        <h2>Three reads worth the time before you commit</h2>
+        <p>Pinned here so you don't have to go digging for them later.</p>
+      </div>
+      <div class="notes-grid">
+        <a class="note-card" href="https://www.justacademy.co/blog-detail/android-app-development-career-guide-how-to-become-an-android-developer" target="_blank" rel="noopener">
+          <div class="note-tape"></div>
+          <span class="label">CAREER GUIDE</span>
+          <h3>How to actually become an Android developer</h3>
+          <p>The full path from first line of Kotlin to first offer letter, without the filler.</p>
+          <span class="note-read">Read the note ↗</span>
+        </a>
+        <a class="note-card" href="https://www.justacademy.co/blog-detail/android-developer-roadmap-2026-skills-tools-and-career-path" target="_blank" rel="noopener">
+          <div class="note-tape"></div>
+          <span class="label">ROADMAP · 2026</span>
+          <h3>Skills, tools, and the career path for 2026</h3>
+          <p>What's worth learning right now versus what's already fading out of job listings.</p>
+          <span class="note-read">Read the note ↗</span>
+        </a>
+        <a class="note-card" href="https://www.justacademy.co/blog-detail/flutter-vs-react-native-vs-android-vs-ios-which-app-development-career-is-best-in-2026" target="_blank" rel="noopener">
+          <div class="note-tape"></div>
+          <span class="label">COMPARISON</span>
+          <h3>Flutter vs React Native vs Android vs iOS</h3>
+          <p>A straight comparison of which mobile career track is actually worth betting on this year.</p>
+          <span class="note-read">Read the note ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="title-block">
+      <div class="tb-cell">
+        <span class="label">Drawing</span>
+        <strong>Android Developer Career Blueprint</strong>
+      </div>
+      <div class="tb-cell">
+        <span class="label">Drawn by</span>
+        <strong>JustAcademy, Pune</strong>
+      </div>
+      <div class="tb-cell">
+        <span class="label">Scale</span>
+        <strong>1:1 — Real Career</strong>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 · Built for people who'd rather build than scroll.</span>
+      <div class="foot-links">
+        <a href="https://www.justacademy.co/course-detail/pune/android-app-development-in-pune" target="_blank" rel="noopener">Android course</a>
+        <a href="https://www.justacademy.co/blog-detail/android-app-development-career-guide-how-to-become-an-android-developer" target="_blank" rel="noopener">Career guide</a>
+        <a href="#top" class="back-top">Back to top</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
